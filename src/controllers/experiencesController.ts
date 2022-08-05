@@ -9,3 +9,10 @@ export async function postExperience(req: Request, res: Response) {
   await experienceService.postExperience(experience, user_id);
   return res.sendStatus(201);
 }
+
+export async function getAllExperiences(req: Request, res: Response) {
+  const user_id: number = res.locals.user.id;
+
+  const experiences = await experienceService.getAllExperiences(user_id);
+  return res.status(200).send(experiences);
+}

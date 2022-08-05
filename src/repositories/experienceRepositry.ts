@@ -29,3 +29,24 @@ export async function postExperience(
   });
   return experienceByTitle;
 }
+
+export async function getAllExperiences(user_id: number) {
+  const experiences = await prisma.categories.findMany({
+    select: {
+      category: true,
+      experiences: {
+        where: {
+          user_id
+        },
+        select: {
+          title: true,
+          place: true,
+          date: true,
+          description: true,
+        },
+      },
+    },
+  });
+
+  return experiences;
+}

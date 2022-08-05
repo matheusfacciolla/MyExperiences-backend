@@ -20,3 +20,8 @@ export async function postExperience(experience: CreateExperienceData, user_id: 
 
     await experienceRepository.postExperience(experience, user_id);
 }
+
+export async function getAllExperiences(user_id: number) {
+  const experiences = await experienceRepository.getAllExperiences(user_id);
+  return experiences;
+}
