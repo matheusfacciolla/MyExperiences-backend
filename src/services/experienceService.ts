@@ -1,8 +1,9 @@
 import * as experienceRepository from "../repositories/experienceRepositry.js";
+import * as categoriesRepository from "../repositories/categoriesRepository.js";
 import { CreateExperienceData } from "../repositories/experienceRepositry.js";
 
 export async function postExperience(experience: CreateExperienceData, user_id: number) {
-    const categoryId = await experienceRepository.findCategoryById(experience.category_id);
+    const categoryId = await categoriesRepository.findCategoryById(experience.category_id);
     if (!categoryId) {
       throw {
         type: "Not_Found",
