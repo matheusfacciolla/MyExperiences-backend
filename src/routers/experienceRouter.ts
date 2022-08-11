@@ -7,6 +7,6 @@ import { ensureAuthenticatedMiddleware } from "../middlewares/authMiddleware.js"
 const experienceRouter = Router();
 
 experienceRouter.post("/experiences/create",ensureAuthenticatedMiddleware, schemaValidator(experienceSchema), postExperience);
-experienceRouter.get("/experiences/get",ensureAuthenticatedMiddleware, getAllExperiences);
+experienceRouter.get("/experiences",ensureAuthenticatedMiddleware, getAllExperiences);
 
 export default experienceRouter;

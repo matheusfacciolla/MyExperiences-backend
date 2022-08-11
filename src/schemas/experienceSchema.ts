@@ -6,5 +6,5 @@ export const experienceSchema = joi.object<CreateExperienceData>({
   place: joi.string().required().max(20),
   date: joi.string().required().min(8),
   description: joi.string().required().max(100),
-  category_id: joi.number().required(),
+  category_id: joi.number().required()
 });
