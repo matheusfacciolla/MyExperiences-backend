@@ -41,7 +41,13 @@ export async function signIn(user: CreateUserData) {
 
   const key = process.env.JWT_SECRET;
   const expiresAt = { expiresIn: 60 * 60 * 24 };
-  const token = jwt.sign({ id: userInfo.id, email: user.email }, key, expiresAt);
+  const token = jwt.sign({ id: userInfo.id, email: userInfo.email, name:userInfo.name }, key, expiresAt);
 
   return token;
+}
+
+export async function findUserByEmail(user: CreateUserData) {
+  const userInfo = await authRepository.findUserByEmail(user.email);
+
+  return userInfo;
 }

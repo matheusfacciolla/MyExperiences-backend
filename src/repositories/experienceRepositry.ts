@@ -17,7 +17,6 @@ export async function postExperience(
   experience: CreateExperienceData,
   user_id: number
 ) {
-
   const experienceByTitle = await prisma.experiences.create({
     data: { ...experience, user_id },
   });
@@ -27,11 +26,11 @@ export async function postExperience(
 export async function getAllExperiences(user_id: number) {
   const experiences = await prisma.categories.findMany({
     select: {
-      id:true,
+      id: true,
       category: true,
       experiences: {
         where: {
-          user_id
+          user_id,
         },
         select: {
           id: true,
@@ -44,7 +43,7 @@ export async function getAllExperiences(user_id: number) {
       planned_experiences: {
         where: {
           user_id,
-          done: true
+          done: true,
         },
         select: {
           id: true,
@@ -52,11 +51,23 @@ export async function getAllExperiences(user_id: number) {
           place: true,
           date: true,
           description: true,
-          done: true
+          done: true,
         },
-      }
+      },
     },
   });
 
   return experiences;
+}
+
+export async function deleteExperienceById(
+  user_id: number,
+  experience_id: number,
+) {
+  await prisma.experiences.deleteMany({
+    where: {
+      id: experience_id,
+      user_id: user_id,
+    },
+  });
 }

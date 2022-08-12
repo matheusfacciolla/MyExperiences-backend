@@ -32,3 +32,7 @@ export async function updatePlannedExperiences(user_id: number, plannedExperienc
   const experiences = await plannedExperienceRepository.updatePlannedExperiences(user_id, plannedExperience);
   return experiences;
 }
+
+export async function deletePlannedExperienceById(user_id: number, plannedExperience_id: number) {
+  await plannedExperienceRepository.deletePlannedExperienceById(user_id, plannedExperience_id);
+}

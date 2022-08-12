@@ -16,3 +16,13 @@ export async function getAllExperiences(req: Request, res: Response) {
   const experiences = await experienceService.getAllExperiences(user_id);
   return res.status(200).send(experiences);
 }
+
+export async function deleteExperienceById(req: Request, res: Response) {
+  const user_id: number = res.locals.user.id;
+  const id = req.params.id;
+
+  const experience_id = parseInt(id)
+
+  await experienceService.deleteExperienceById(user_id, experience_id);
+  return res.status(200);
+}

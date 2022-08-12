@@ -26,3 +26,7 @@ export async function getAllExperiences(user_id: number) {
   const experiences = await experienceRepository.getAllExperiences(user_id);
   return experiences;
 }
+
+export async function deleteExperienceById(user_id: number, experience_id: number) {
+  await experienceRepository.deleteExperienceById(user_id, experience_id);
+}
