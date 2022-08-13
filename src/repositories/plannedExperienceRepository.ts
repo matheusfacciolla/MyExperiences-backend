@@ -40,6 +40,9 @@ export async function getAllPlannedExperiences(user_id: number) {
           description: true,
           done: true
         },
+        orderBy:{
+          date: 'asc'
+        }
       },
     },
   });

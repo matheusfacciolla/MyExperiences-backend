@@ -39,6 +39,9 @@ export async function getAllExperiences(user_id: number) {
           date: true,
           description: true,
         },
+        orderBy:{
+          date: 'desc'
+        }
       },
       planned_experiences: {
         where: {
@@ -53,6 +56,9 @@ export async function getAllExperiences(user_id: number) {
           description: true,
           done: true,
         },
+        orderBy:{
+          date: 'desc'
+        }
       },
     },
   });
