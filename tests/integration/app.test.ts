@@ -68,6 +68,66 @@ describe("sign-in tests", () => {
   });
 });
 
+describe("experience tests", () => {
+  it("given valid input, without token fail to create a experience", async () => {
+    const input = appFactory.createExperienceInput();
+
+    const response = await supertest(app).post("/experiences/create").set('Authorization', `Bearer`).send(input);
+    expect(response.statusCode).toBe(500);
+  });
+
+  it("given valid input, create a experience", async () => {
+    const token = await scenarioFactory.scenarioUserLogged();
+    const input = appFactory.createExperienceInput();
+
+    const response = await supertest(app).post("/experiences/create").set('Authorization', `Bearer ${token}`).send(input);
+    expect(response.statusCode).toBe(201);
+  });
+
+  it("given invalid input, fail to create a experience", async () => {
+    const token = await scenarioFactory.scenarioUserLogged();
+    const input = appFactory.createExperienceInput();
+    delete input.title
+
+    const response = await supertest(app).post("/experiences/create").set('Authorization', `Bearer ${token}`).send(input);
+    expect(response.statusCode).toBe(422);
+  });
+
+  it("without token fail to get experiences", async () => {
+    const response = await supertest(app).get("/experiences").set('Authorization', `Bearer`);
+    expect(response.statusCode).toBe(500);
+  });
+
+  it("with token, get experiences", async () => {
+    const token = await scenarioFactory.scenarioUserLogged();
+
+    const response = await supertest(app).get("/experiences").set('Authorization', `Bearer ${token}`);
+    expect(response.statusCode).toBe(200);
+  });
+
+  
+  it("without token fail to delete experience", async () => {
+    const scenario = await scenarioFactory.scenarioPlannedExperienceCreated();
+    
+    const response = await supertest(app).delete(`/experiences/planned/delete/${scenario.res.id}`).set('Authorization', `Bearer`);
+    expect(response.statusCode).toBe(500);
+  });
+
+  // it("with token and valid id delete experience", async () => {
+  //   const scenario = await scenarioFactory.scenarioExperienceCreated();
+
+  //   const response = await supertest(app).delete(`/experiences/delete/1`).set('Authorization', `Bearer ${scenario.token}`)
+  //   expect(response.statusCode).toBe(200);
+  // });
+
+  it("with token and invalid id fail to delete experience", async () => {
+    const token = await scenarioFactory.scenarioUserLogged();
+
+    const response = await supertest(app).delete(`/experiences/delete`).set('Authorization', `Bearer ${token}`);
+    expect(response.statusCode).toBe(404);
+  });
+});
+
 describe("planned experience tests", () => {
   it("given valid input, without token fail to create a planned experience", async () => {
     const input = appFactory.createPlannedExperienceInput();
@@ -133,12 +193,12 @@ describe("planned experience tests", () => {
   //   expect(response.statusCode).toBe(200);
   // });
 
-  // it("with token and invalid id fail to delete planned experience", async () => {
-  //   const token = await scenarioFactory.scenarioUserLogged();
+  it("with token and invalid id fail to delete planned experience", async () => {
+    const token = await scenarioFactory.scenarioUserLogged();
 
-  //   const response = await supertest(app).delete(`/experiences/delete/${0}`).set('Authorization', `Bearer ${token}`);
-  //   expect(response.statusCode).toBe(404);
-  // });
+    const response = await supertest(app).delete(`/experiences/delete/`).set('Authorization', `Bearer ${token}`);
+    expect(response.statusCode).toBe(404);
+  });
 });
 
 afterAll(async () => {

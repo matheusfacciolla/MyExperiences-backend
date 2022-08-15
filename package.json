@@ -5,11 +5,10 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node src/server.js",
+    "build": "prisma db seed && tsc",
+    "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
-    "dev:test": "dotenv -e .env.test nodemon src/server.ts",
-    "test": "dotenv -e .env.test prisma migrate dev && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i",
-    "test:unit": "dotenv -e .env.test cross-env NODE_OPTIONS=--experimental-vm-modules jest -- -i --coverage --testPathPattern=tests/unit"
+    "test": "dotenv -e .env.test prisma migrate dev && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
