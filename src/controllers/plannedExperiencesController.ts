@@ -22,8 +22,8 @@ export async function updatePlannedExperiences(req: Request, res: Response) {
   const plannedExperience: planned_experiences = req.body;
   const user_id: number = res.locals.user.id;
 
-  const plannedExperiences = await plannedExperienceService.updatePlannedExperiences(user_id, plannedExperience);
-  return res.status(200).send(plannedExperiences);
+  await plannedExperienceService.updatePlannedExperiences(user_id, plannedExperience);
+  return res.sendStatus(200);
 }
 
 export async function deletePlannedExperienceById(req: Request, res: Response) {
@@ -33,5 +33,5 @@ export async function deletePlannedExperienceById(req: Request, res: Response) {
   const plannedExperience_id = parseInt(id)
 
   await plannedExperienceService.deletePlannedExperienceById(user_id, plannedExperience_id);
-  return res.status(200);
+  return res.sendStatus(200);
 }

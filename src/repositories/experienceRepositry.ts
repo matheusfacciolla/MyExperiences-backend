@@ -66,14 +66,23 @@ export async function getAllExperiences(user_id: number) {
   return experiences;
 }
 
+export async function findExperienceById(experience_id: number) {
+  const experienceById = await prisma.experiences.findFirst({
+    where: { id: experience_id },
+  });
+  return experienceById;
+}
+
 export async function deleteExperienceById(
   user_id: number,
   experience_id: number,
 ) {
-  await prisma.experiences.deleteMany({
+  const res = await prisma.experiences.deleteMany({
     where: {
       id: experience_id,
       user_id: user_id,
     },
   });
+
+  return res;
 }

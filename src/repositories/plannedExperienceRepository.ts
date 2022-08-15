@@ -71,10 +71,12 @@ export async function deletePlannedExperienceById(
   user_id: number,
   plannedExperience_id: number,
 ) {
-  await prisma.planned_experiences.deleteMany({
+  const res = await prisma.planned_experiences.deleteMany({
     where: {
       id: plannedExperience_id,
       user_id: user_id,
     },
   });
+
+  return res;
 }

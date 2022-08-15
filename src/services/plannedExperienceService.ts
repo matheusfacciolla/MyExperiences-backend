@@ -34,5 +34,6 @@ export async function updatePlannedExperiences(user_id: number, plannedExperienc
 }
 
 export async function deletePlannedExperienceById(user_id: number, plannedExperience_id: number) {
-  await plannedExperienceRepository.deletePlannedExperienceById(user_id, plannedExperience_id);
+  const res = await plannedExperienceRepository.deletePlannedExperienceById(user_id, plannedExperience_id);
+  return res;
 }

@@ -109,7 +109,7 @@ describe("experience tests", () => {
   it("without token fail to delete experience", async () => {
     const scenario = await scenarioFactory.scenarioPlannedExperienceCreated();
     
-    const response = await supertest(app).delete(`/experiences/planned/delete/${scenario.res.id}`).set('Authorization', `Bearer`);
+    const response = await supertest(app).delete(`/experiences/planned/delete/1`).set('Authorization', `Bearer`);
     expect(response.statusCode).toBe(500);
   });
 
@@ -182,14 +182,14 @@ describe("planned experience tests", () => {
   it("without token fail to delete planned experience", async () => {
     const scenario = await scenarioFactory.scenarioPlannedExperienceCreated();
 
-    const response = await supertest(app).delete(`/experiences/planned/delete/${scenario.res.id}`).set('Authorization', `Bearer`);
+    const response = await supertest(app).delete(`/experiences/planned/delete/1`).set('Authorization', `Bearer`);
     expect(response.statusCode).toBe(500);
   });
 
   it("with token and valid id delete planned experience", async () => {
     const scenario = await scenarioFactory.scenarioExperienceCreated();
 
-    const response = await supertest(app).delete(`/experiences/delete/${scenario.res.id}`).set('Authorization', `Bearer ${scenario.token}`);
+    const response = await supertest(app).delete(`/experiences/delete/1`).set('Authorization', `Bearer ${scenario.token}`);
     expect(response.statusCode).toBe(200);
   });
 

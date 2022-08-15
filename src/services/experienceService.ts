@@ -28,5 +28,15 @@ export async function getAllExperiences(user_id: number) {
 }
 
 export async function deleteExperienceById(user_id: number, experience_id: number) {
-  await experienceRepository.deleteExperienceById(user_id, experience_id);
+  const experienceById = await experienceRepository.findExperienceById(experience_id);
+
+  if(!experienceById){
+    throw {
+      type: "Not_Found",
+      message: "Experience not found!",
+    };
+  }
+
+  const res = await experienceRepository.deleteExperienceById(user_id, experience_id);
+  return res;
 }
