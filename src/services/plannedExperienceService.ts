@@ -34,6 +34,15 @@ export async function updatePlannedExperiences(user_id: number, plannedExperienc
 }
 
 export async function deletePlannedExperienceById(user_id: number, plannedExperience_id: number) {
+  const plannedExperienceById = await plannedExperienceRepository.findPlannedExperienceById(plannedExperience_id);
+
+  if(!plannedExperienceById){
+    throw {
+      type: "Not_Found",
+      message: "Planned Experience not found!",
+    };
+  }
+
   const res = await plannedExperienceRepository.deletePlannedExperienceById(user_id, plannedExperience_id);
   return res;
 }

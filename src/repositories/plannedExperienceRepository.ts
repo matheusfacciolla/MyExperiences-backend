@@ -67,6 +67,13 @@ export async function updatePlannedExperiences(
   return updatePlannedExperience;
 }
 
+export async function findPlannedExperienceById(plannedExperience_id: number) {
+  const plannedExperienceById = await prisma.planned_experiences.findFirst({
+    where: { id: plannedExperience_id },
+  });
+  return plannedExperienceById;
+}
+
 export async function deletePlannedExperienceById(
   user_id: number,
   plannedExperience_id: number,
