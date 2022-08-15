@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "build": "prisma db seed && tsc",
+    "build": "tsc",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "test": "dotenv -e .env.test prisma migrate dev && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i"
