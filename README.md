@@ -1,4 +1,3 @@
-
 # <p align = "center"> Projeto MyExperiences </p>
 
 <p align="center">
