@@ -24,5 +24,5 @@ export async function deleteExperienceById(req: Request, res: Response) {
   const experience_id = parseInt(id)
 
   await experienceService.deleteExperienceById(user_id, experience_id);
-  return res.status(200);
+  return res.sendStatus(200);
 }
