@@ -119,7 +119,7 @@ Certifique-se que voce tem a ultima versão estável do [Node.js](https://nodejs
 Primeiro, faça o clone desse repositório na sua maquina:
 
 ```
-git clone https://github.com/matheusfacciolla/MyExperiences-backend
+git clone https://github.com/matheusfacciolla/MyExperiences-backend.git
 ```
 
 Depois, dentro da pasta, rode o seguinte comando para instalar as dependencias.

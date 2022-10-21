@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import * as authRepository from "../repositories/authRepository.js";
+import { authRepository } from "../repositories/authRepository.js";
 import { CreateUserData } from "../repositories/authRepository.js";
 
 export async function signUp(user: CreateUserData) {
@@ -23,7 +23,10 @@ export async function signUp(user: CreateUserData) {
 
 export async function signIn(user: CreateUserData) {
   const userInfo = await authRepository.findUserByEmail(user.email);
-  const isCorrectPassword = bcrypt.compareSync(user.password, userInfo.password);
+  const isCorrectPassword = bcrypt.compareSync(
+    user.password,
+    userInfo.password
+  );
 
   if (!userInfo) {
     throw {
@@ -41,7 +44,11 @@ export async function signIn(user: CreateUserData) {
 
   const key = process.env.JWT_SECRET;
   const expiresAt = { expiresIn: 60 * 60 * 24 };
-  const token = jwt.sign({ id: userInfo.id, email: userInfo.email, name:userInfo.name }, key, expiresAt);
+  const token = jwt.sign(
+    { id: userInfo.id, email: userInfo.email, name: userInfo.name },
+    key,
+    expiresAt
+  );
 
   return token;
 }
@@ -51,3 +58,9 @@ export async function findUserByEmail(user: CreateUserData) {
 
   return userInfo;
 }
+
+export const authService = {
+  signUp,
+  signIn,
+  findUserByEmail,
+};
