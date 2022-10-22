@@ -6,14 +6,14 @@ export type CreateExperienceData = Omit<
   "id" | "user_id" | "created_at"
 >;
 
-export async function findExperienceByTitle(title: string) {
+async function findExperienceByTitle(title: string) {
   const experienceByTitle = await prisma.experiences.findFirst({
     where: { title },
   });
   return experienceByTitle;
 }
 
-export async function postExperience(
+async function postExperience(
   experience: CreateExperienceData,
   user_id: number
 ) {
@@ -23,7 +23,7 @@ export async function postExperience(
   return experienceByTitle;
 }
 
-export async function getAllExperiences(user_id: number) {
+async function getAllExperiences(user_id: number) {
   const experiences = await prisma.categories.findMany({
     select: {
       id: true,
@@ -66,17 +66,14 @@ export async function getAllExperiences(user_id: number) {
   return experiences;
 }
 
-export async function findExperienceById(experience_id: number) {
+async function findExperienceById(experience_id: number) {
   const experienceById = await prisma.experiences.findFirst({
     where: { id: experience_id },
   });
   return experienceById;
 }
 
-export async function deleteExperienceById(
-  user_id: number,
-  experience_id: number,
-) {
+async function deleteExperienceById(user_id: number, experience_id: number) {
   const res = await prisma.experiences.deleteMany({
     where: {
       id: experience_id,
@@ -86,3 +83,11 @@ export async function deleteExperienceById(
 
   return res;
 }
+
+export const experienceRepository = {
+  findExperienceByTitle,
+  postExperience,
+  getAllExperiences,
+  findExperienceById,
+  deleteExperienceById,
+};
