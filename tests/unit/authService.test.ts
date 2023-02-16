@@ -3,14 +3,11 @@ import { faker } from "@faker-js/faker";
 import bcrypt from "bcrypt";
 
 import { authService } from "../../src/services/authService.js";
-import { authRepository }  from "../../src/repositories/authRepository.js";
-import { CreateUserData } from "../../src/repositories/authRepository.js";
+import { authRepository, CreateUserData } from "../../src/repositories/authRepository.js";
 
 beforeEach(() => {
   jest.resetAllMocks();
 });
-
-//jest.mock("../../src/repositories/authRepository.js");
 
 describe("Sign up suite", () => {
   it("given valid email, name and password information, sign up", async () => {
@@ -22,9 +19,9 @@ describe("Sign up suite", () => {
 
     jest
       .spyOn(authRepository, "findUserByEmail")
-      .mockImplementationOnce((): any => {});
+      .mockImplementationOnce((): any => { });
 
-    jest.spyOn(authRepository, "createUser").mockImplementationOnce((): any => {});
+    jest.spyOn(authRepository, "createUser").mockImplementationOnce((): any => { });
 
     await authService.signUp(user);
     expect(authRepository.findUserByEmail).toBeCalled();

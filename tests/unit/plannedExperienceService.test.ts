@@ -1,18 +1,15 @@
 import { jest } from "@jest/globals";
 import { faker } from "@faker-js/faker";
-//import bcrypt from "bcrypt";
 
 import { plannedExperienceService } from "../../src/services/plannedExperienceService.js";
-import { plannedExperienceRepository } from "../../src/repositories/plannedExperienceRepository.js";
+import { plannedExperienceRepository, CreatePlannedExperienceData } from "../../src/repositories/plannedExperienceRepository.js";
 import { categoriesRepository } from "../../src/repositories/categoriesRepository.js";
-import { CreatePlannedExperienceData } from "../../src/repositories/plannedExperienceRepository.js";
 import { planned_experiences } from "@prisma/client";
 
 beforeEach(() => {
   jest.resetAllMocks();
 });
 
-//jest.mock("../../src/repositories/authRepository.js");
 
 describe("Post plannedExperience suite", () => {
   it("given valid information, post a plannedExperience", async () => {
@@ -42,8 +39,7 @@ describe("Post plannedExperience suite", () => {
       plannedExperience,
       user_id
     );
-    // expect(categoriesRepository.findCategoryById).toBeCalled();
-    // expect(plannedExperienceRepository.findplannedExperienceByTitle).toBeCalled();
+
     expect(promise).not.toBeNull();
   });
 
@@ -102,8 +98,7 @@ describe("Post plannedExperience suite", () => {
       plannedExperience,
       user_id
     );
-    // expect(categoriesRepository.findCategoryById).toBeCalled();
-    // expect(plannedExperienceRepository.findplannedExperienceByTitle).toBeCalled();
+
     expect(promise).rejects.toEqual({
       type: "Conflict",
       message: "This planning is already registered!",
@@ -155,8 +150,8 @@ describe("Delete plannedExperience suite", () => {
       });
 
     const promise = plannedExperienceService.deletePlannedExperienceById(
-      plannedExperience_id,
-      user_id
+      user_id,
+      plannedExperience_id
     );
     expect(plannedExperienceRepository.findPlannedExperienceById).toBeCalled();
     expect(promise).not.toBeNull();
@@ -173,8 +168,8 @@ describe("Delete plannedExperience suite", () => {
       });
 
     const promise = plannedExperienceService.deletePlannedExperienceById(
-      plannedExperience_id,
-      user_id
+      user_id,
+      plannedExperience_id
     );
     expect(plannedExperienceRepository.findPlannedExperienceById).toBeCalled();
     expect(promise).rejects.toEqual({

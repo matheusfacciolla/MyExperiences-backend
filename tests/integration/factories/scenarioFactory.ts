@@ -1,8 +1,6 @@
-// import prisma from "../../../src/config/database.js";
-import { Request, Response } from "express";
 import * as authFactory from "../../integration/factories/appFactory.js";
 import * as authService from "../../../src/services/authService.js";
-import * as experienceService from "../../../src/repositories/experienceRepositry.js";
+import * as experienceService from "../../../src/services/experienceService.js";
 
 export async function scenarioUserLogged() {
   const login = authFactory.createSignUp();

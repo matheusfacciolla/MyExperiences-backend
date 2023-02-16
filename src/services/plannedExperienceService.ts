@@ -1,6 +1,5 @@
-import { plannedExperienceRepository } from "../repositories/plannedExperienceRepository.js";
+import { plannedExperienceRepository, CreatePlannedExperienceData } from "../repositories/plannedExperienceRepository.js";
 import { categoriesRepository } from "../repositories/categoriesRepository.js";
-import { CreatePlannedExperienceData } from "../repositories/plannedExperienceRepository.js";
 import { planned_experiences } from "@prisma/client";
 
 async function postPlannedExperience(
@@ -35,19 +34,17 @@ async function postPlannedExperience(
 }
 
 async function getAllPlannedExperiences(user_id: number) {
-  const experiences =
-    await plannedExperienceRepository.getAllPlannedExperiences(user_id);
+  await plannedExperienceRepository.getAllPlannedExperiences(user_id);
 }
 
 async function updatePlannedExperiences(
   user_id: number,
   plannedExperience: planned_experiences
 ) {
-  const experiences =
-    await plannedExperienceRepository.updatePlannedExperiences(
-      user_id,
-      plannedExperience
-    );
+  await plannedExperienceRepository.updatePlannedExperiences(
+    user_id,
+    plannedExperience
+  );
 }
 
 async function deletePlannedExperienceById(
@@ -66,7 +63,7 @@ async function deletePlannedExperienceById(
     };
   }
 
-  const res = await plannedExperienceRepository.deletePlannedExperienceById(
+  await plannedExperienceRepository.deletePlannedExperienceById(
     user_id,
     plannedExperience_id
   );

@@ -1,17 +1,13 @@
 import { jest } from "@jest/globals";
 import { faker } from "@faker-js/faker";
-//import bcrypt from "bcrypt";
 
 import { experienceService } from "../../src/services/experienceService.js";
-import { experienceRepository } from "../../src/repositories/experienceRepositry.js";
+import { experienceRepository, CreateExperienceData } from "../../src/repositories/experienceRepositry.js";
 import { categoriesRepository } from "../../src/repositories/categoriesRepository.js";
-import { CreateExperienceData } from "../../src/repositories/experienceRepositry.js";
 
 beforeEach(() => {
   jest.resetAllMocks();
 });
-
-//jest.mock("../../src/repositories/authRepository.js");
 
 describe("Post experience suite", () => {
   it("given valid information, post a experience", async () => {
@@ -37,8 +33,6 @@ describe("Post experience suite", () => {
       });
 
     const promise = experienceService.postExperience(experience, user_id);
-    // expect(categoriesRepository.findCategoryById).toBeCalled();
-    // expect(experienceRepository.findExperienceByTitle).toBeCalled();
     expect(promise).not.toBeNull();
   });
 
@@ -89,8 +83,7 @@ describe("Post experience suite", () => {
       });
 
     const promise = experienceService.postExperience(experience, user_id);
-    // expect(categoriesRepository.findCategoryById).toBeCalled();
-    // expect(experienceRepository.findExperienceByTitle).toBeCalled();
+
     expect(promise).rejects.toEqual({
       type: "Conflict",
       message: "This experience is already registered!",
@@ -119,8 +112,8 @@ describe("Delete experience suite", () => {
       });
 
     const promise = experienceService.deleteExperienceById(
-      experience_id,
-      user_id
+      user_id,
+      experience_id
     );
     expect(experienceRepository.findExperienceById).toBeCalled();
     expect(promise).not.toBeNull();
@@ -137,8 +130,8 @@ describe("Delete experience suite", () => {
       });
 
     const promise = experienceService.deleteExperienceById(
-      experience_id,
-      user_id
+      user_id,
+      experience_id
     );
     expect(experienceRepository.findExperienceById).toBeCalled();
     expect(promise).rejects.toEqual({

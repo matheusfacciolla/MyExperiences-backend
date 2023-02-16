@@ -1,6 +1,5 @@
-import { experienceRepository } from "../repositories/experienceRepositry.js";
-import { categoriesRepository } from "../repositories/categoriesRepository.js";
-import { CreateExperienceData } from "../repositories/experienceRepositry.js";
+import { experienceRepository, CreateExperienceData } from "../repositories/experienceRepositry.js";
+import { categoriesRepository, } from "../repositories/categoriesRepository.js";
 
 export async function postExperience(
   experience: CreateExperienceData,
@@ -30,7 +29,7 @@ export async function postExperience(
 }
 
 export async function getAllExperiences(user_id: number) {
-  const experiences = await experienceRepository.getAllExperiences(user_id);
+  await experienceRepository.getAllExperiences(user_id);
 }
 
 export async function deleteExperienceById(
@@ -48,7 +47,7 @@ export async function deleteExperienceById(
     };
   }
 
-  const res = await experienceRepository.deleteExperienceById(
+  await experienceRepository.deleteExperienceById(
     user_id,
     experience_id
   );

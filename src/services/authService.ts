@@ -1,8 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { authRepository } from "../repositories/authRepository.js";
-import { CreateUserData } from "../repositories/authRepository.js";
+import { authRepository, CreateUserData } from "../repositories/authRepository.js";
 
 export async function signUp(user: CreateUserData) {
   const isEmailExist = await authRepository.findUserByEmail(user.email);
@@ -17,8 +16,6 @@ export async function signUp(user: CreateUserData) {
       message: "E-mail already exist",
     };
   }
-
-  return;
 }
 
 export async function signIn(user: CreateUserData) {
