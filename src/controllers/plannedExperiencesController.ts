@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as plannedExperienceService from "../services/plannedExperienceService.js";
+import { plannedExperienceService } from "../services/plannedExperienceService.js";
 import { CreatePlannedExperienceData } from "../repositories/plannedExperienceRepository.js";
 import { planned_experiences } from "@prisma/client";
 
