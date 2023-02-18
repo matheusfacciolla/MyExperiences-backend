@@ -2,6 +2,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import { authRepository, CreateUserData } from "../repositories/authRepository.js";
+import { users } from "@prisma/client";
+
+export type CreateUserInfo = Omit<users, "created_at">;
 
 export async function signUp(user: CreateUserData) {
   const isEmailExist = await authRepository.findUserByEmail(user.email);
@@ -19,7 +22,7 @@ export async function signUp(user: CreateUserData) {
 }
 
 export async function signIn(user: CreateUserData) {
-  const userInfo: CreateUserData = await authRepository.findUserByEmail(user.email);
+  const userInfo: CreateUserInfo = await authRepository.findUserByEmail(user.email);
   const isCorrectPassword = bcrypt.compareSync(
     user.password,
     userInfo.password

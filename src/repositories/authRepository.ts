@@ -1,7 +1,7 @@
 import prisma from "../config/database.js";
 import { users } from "@prisma/client";
 
-export type CreateUserData = Omit<users, "created_at">;
+export type CreateUserData = Omit<users, "id" | "created_at">;
 
 async function findUserByEmail(email: string) {
   const user = await prisma.users.findFirst({ where: { email } });
