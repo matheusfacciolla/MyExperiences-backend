@@ -22,9 +22,7 @@ export async function signUp(user: CreateUserData) {
 }
 
 export async function signIn(user: CreateUserData) {
-  console.log("USER222 -> ", user)
   const userInfo: CreateUserInfo = await authRepository.findUserByEmail(user.email);
-  console.log("USERINFO -> ", userInfo)
   const isCorrectPassword = bcrypt.compareSync(
     user.password,
     userInfo.password
@@ -46,15 +44,12 @@ export async function signIn(user: CreateUserData) {
   }
 
   const key = process.env.JWT_SECRET;
-  console.log("KEY -> ", key)
   const expiresAt = { expiresIn: 60 * 60 * 24 };
   const token = jwt.sign(
     { id: userInfo.id, email: userInfo.email, name: userInfo.name },
     key,
     expiresAt
   );
-
-  console.log("TOKEEEEN -> ", token)
 
   return token;
 }

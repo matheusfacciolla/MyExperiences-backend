@@ -29,7 +29,7 @@ export async function postExperience(
 }
 
 export async function getAllExperiences(user_id: number) {
-  await experienceRepository.getAllExperiences(user_id);
+ return await experienceRepository.getAllExperiences(user_id);
 }
 
 export async function deleteExperienceById(

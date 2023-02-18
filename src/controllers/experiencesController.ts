@@ -13,7 +13,10 @@ export async function postExperience(req: Request, res: Response) {
 export async function getAllExperiences(req: Request, res: Response) {
   const user_id: number = res.locals.user.id;
 
+  console.log(user_id)
+
   const experiences = await experienceService.getAllExperiences(user_id);
+  console.log("EXPERIENCES -> ", experiences)
   return res.status(200).send(experiences);
 }
 
