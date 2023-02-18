@@ -9,7 +9,7 @@ export async function signUp(user: CreateUserData) {
 
   if (!isEmailExist) {
     user.password = bcrypt.hashSync(user.password, SALT);
-    await authRepository.createUser(user);
+    return await authRepository.createUser(user);
   } else {
     throw {
       type: "Conflict",
@@ -19,7 +19,7 @@ export async function signUp(user: CreateUserData) {
 }
 
 export async function signIn(user: CreateUserData) {
-  const userInfo = await authRepository.findUserByEmail(user.email);
+  const userInfo: CreateUserData = await authRepository.findUserByEmail(user.email);
   const isCorrectPassword = bcrypt.compareSync(
     user.password,
     userInfo.password

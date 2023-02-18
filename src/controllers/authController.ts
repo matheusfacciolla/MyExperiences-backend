@@ -13,6 +13,6 @@ export async function signIn(req: Request, res: Response) {
   const user: CreateUserData = req.body;
 
   const token = await authService.signIn(user);
-  const userName = await authService.findUserByEmail(user)
+  const userName: CreateUserData = await authService.findUserByEmail(user)
   return res.status(200).send({ token, name: userName.name });
 }
