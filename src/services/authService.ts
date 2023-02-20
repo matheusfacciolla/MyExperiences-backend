@@ -27,7 +27,6 @@ export async function signIn(user: CreateUserData) {
     user.password,
     userInfo.password
   );
-  console.log("ISCORRECTPASSWORD -> ", isCorrectPassword)
 
   if (!userInfo) {
     throw {

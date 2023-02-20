@@ -34,7 +34,7 @@ async function postPlannedExperience(
 }
 
 async function getAllPlannedExperiences(user_id: number) {
-  await plannedExperienceRepository.getAllPlannedExperiences(user_id);
+  return await plannedExperienceRepository.getAllPlannedExperiences(user_id);
 }
 
 async function updatePlannedExperiences(
